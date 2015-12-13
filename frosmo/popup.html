@@ -6,9 +6,29 @@
     </style>
     <script src="popup.js"></script>
   </head>
-  <body>
+  <body style="font-size: 0.8em">
   <h3>Frosmo Inspector</h3>
   <span id="development"></span>
   <button id="refreshBtn">Refresh</button>
+    <fieldset style="border:none; outline: none">
+      <dl>
+        <dt><label for="debug"> Enable Debug</label><input type="text" name="debug" value="frosmo.easy.store.set('frosmo_debug', true);"></input></dt>
+        <dt><label for="segments"> Show Segments</label><input type="text" name="segments" value="frosmo.easy.context.segments"></input></dt>
+        <dt><label for="aorb"> A or B? </label><input type="text" name="aorb" value="frosmo.request.jsonp(
+    frosmo.easy.api.getApiUrl('sync') + '?',
+    {
+        params : {method: 'get_segments', cookieId : frosmo.easy.uid.get(), origin: frosmo.easy.config.api.origin},
+        on : {
+            success : function (resp) {
+                console.log(resp)
+            }
+        }
+    }
+);"></input>
+</dt>
+        <dt><label for="gotob"> Go to Normal Group</label><input type="text" name="gotob" value="frosmo.easy.api.setUserSegment(null, 'abtest', 'b');"></input></dt>
+        <dt><label for="gotoa"> Go to Comparison Group</label><input type="text" name="gotoa" value="frosmo.easy.api.setUserSegment(null, 'abtest', 'a');"></input></dt>
+    </dl>
+    </fieldset>
   </body>
 </html>
